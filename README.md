@@ -1,9 +1,9 @@
 This project is adapted from https://github.com/Tierion/merkle-tools .
+The purpose is to generate Merkle trees, calculate the proofs, and validate the data.
 
-Apart from removing some features, there are two main differences here:
-* Only use 'keccak256' hash function (from [ethereumjs-util](https://github.com/ethereumjs/ethereumjs-util))
-* We sort the leaves by using the hash of transactions (the original merkle-tools
-  sort by order)
+Apart from removing some features, the main differences of this code is:
+* Only use `keccak256` hash function (from [ethereumjs-util](https://github.com/ethereumjs/ethereumjs-util))
+* Sort the leaves by using the hash of transactions (the original merkle-tools sort by the sequence while adding the leaves)
 
 # Brief intro
 See the example:
@@ -33,8 +33,9 @@ See the example:
         1 2 3  4   5      level 3
 
 For example, if there are 5 transactions (tx), the merkle tree would look like above.
-Numbers are index of tx (leaves), circles are hashes, '[root]' is Merkle root.  To
-validate tx 2, one need these proofs (returned value of merkleTree.getProof(2)): hash of
-'1', hash of '3+4' in level 1, and hash of 5 . By using the tx 2 (to be validated) and
-these proof, the merkleTree.validateProof() creae a new hash then compare the result with
+
+* Numbers are index of tx (leaves), circles are hashes, `[root]` is Merkle root
+* To validate tx 2, one need these proofs (returned value of merkleTree.getProof(2))
+    - hash of `1`, hash of `hash(3)+hash(4)` in level 2, and hash of 5
+    - By using the tx 2 (to be validated) and these proof, the merkleTree.validateProof() creae a new hash then compare the result with
 the known merkleroot (getMerkleRoot()), and return true if the target is valid.
