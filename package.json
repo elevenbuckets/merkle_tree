@@ -1,0 +1,15 @@
+{
+  "name": "merkle_tree",
+  "version": "1.0.0",
+  "description": "Adapted from https://github.com/Tierion/merkle-tools with two main differences: we only use 'keccak256' hash function and  sort the leaves by using the hash of transactions",
+  "main": "merkle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-utils": "^5.2.5"
+  }
+}
