@@ -39,6 +39,6 @@ target = merkleTree.getLeaf(3);  // use a wrong target hash
 isValid = merkleTree.validateProof(proof, target, mroot);
 console.log(`2: ${isValid} (target hash: ${target.toString('hex')})`);
 
-console.log('\ntest resetTree() (should return null):');
+console.log('\ntest resetTree() then ask for the MerkleRoot (should return null):');
 merkleTree.resetTree();
 console.log(merkleTree.getMerkleRoot());  // should return null
