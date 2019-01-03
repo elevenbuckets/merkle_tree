@@ -33,8 +33,7 @@ class MerkleTree {
 
         this.makeTree = () => {
             this.tree.isReady = false;
-            // this.tree.leaves.sort()  // safe to sort these buffer? see https://stackoverflow.com/questions/13790259/buffer-comparison-in-node-js
-            this.tree.leaves = (this.tree.leaves.map((x) => x.toString('hex')).sort()).map((x)=>this._getBuffer(x));
+            this.tree.leaves.sort(Buffer.compare);
             let leafCount = this.tree.leaves.length;
             if (leafCount > 0) {
                 this.tree.levels = [];
