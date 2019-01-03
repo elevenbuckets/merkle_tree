@@ -55,7 +55,7 @@ class MerkleTree {
         };
 
         // Returns the proof for a leaf at the given index as an array of merkle siblings in hex format
-        this.getProof = (index) => {
+        this.getProof = (index, splitProofObj = false) => {
             if (!this.tree.isReady) return null;
             let currentRowIndex = this.tree.levels.length - 1;
             if (index < 0 || index > this.tree.levels[currentRowIndex].length - 1) return null;  // the index it out of the bounds of the leaf array
@@ -80,7 +80,25 @@ class MerkleTree {
                 proof.push(sibling);
                 index = Math.floor(index / 2);  // set index to the parent index
             }
-            return proof;
+
+            if (splitProofObj) {
+                let proofIsLeft = []; let proof1 = [];
+                proof.map( (ele) => {
+                    if (ele.hasOwnProperty('left') && !ele.hasOwnProperty('right')){
+                        proofIsLeft.push(true);
+                        proof1.push(ele['left']);
+                    } else if (ele.hasOwnProperty('right') && !ele.hasOwnProperty('left')) {
+                        proofIsLeft.push(false);
+                        proof1.push(ele['right']);
+                    } else {
+                        throw "Something's wrong about the input";
+                    }
+                });
+                return [proofIsLeft, proof1];
+            } else {
+                return proof
+            }
+
         };
 
         this.getLeafCount = () => {
