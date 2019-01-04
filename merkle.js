@@ -86,10 +86,10 @@ class MerkleTree {
                 proof.map( (ele) => {
                     if (ele.hasOwnProperty('left') && !ele.hasOwnProperty('right')){
                         proofIsLeft.push(true);
-                        proof1.push(ele['left']);
+                        proof1.push(this._getBuffer(ele['left']));
                     } else if (ele.hasOwnProperty('right') && !ele.hasOwnProperty('left')) {
                         proofIsLeft.push(false);
-                        proof1.push(ele['right']);
+                        proof1.push(this._getBuffer(ele['right']));
                     } else {
                         throw "Something's wrong about the input";
                     }
