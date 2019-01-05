@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-contract MerkleTreeValidate {
+contract MerkleTreeValidator {
     address public owner;
     uint constant maxLengthOfProof = 1024;
     struct MerkleRoot {
@@ -25,7 +25,7 @@ contract MerkleTreeValidate {
         newRoot.root = root;
         newRoot.bufmessage = bufmessage;
         merkleRootInfo[blockNo] = newRoot;
-        return;
+        return true;
     }
 
     function validate(bytes32[] memory proof, bool[] memory isLeft, bytes32 targetLeaf, bytes32 merkleRoot) public pure returns (bool) {
