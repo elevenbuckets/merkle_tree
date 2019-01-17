@@ -140,6 +140,8 @@ class MerkleTree {
                 return value;
             } else if (this._isHex(value)) {
                 return Buffer.from(value, 'hex');
+            } else if (this._isHex(value.slice(2))) {
+                return Buffer.from(value.slice(2), 'hex');
             } else { // the value is neither buffer nor hex string, will not process this, throw error
                 throw new Error("Bad hex value - '" + value + "'");
             }

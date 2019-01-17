@@ -3,7 +3,9 @@ const keccak256 = require('ethereumjs-utils').keccak256;
 
 const merkleTree = new MerkleTree();
 merkleTree.addLeaf('a', true);  // the 'true' tell addLeaf to convert to hash
-merkleTree.addLeaves(['b', 'c', 'd', 'e'].map((x)=>keccak256(x).toString('hex')));
+var b = '0x' + keccak256('b').toString('hex');  // '0x' in front is also fine
+merkleTree.addLeaf(b);
+merkleTree.addLeaves(['c', 'd', 'e'].map((x)=>keccak256(x).toString('hex')));
 merkleTree.makeTree();
 
 console.log("Added hashes of 'a', 'b', 'c', 'd', 'e' to the tree:");
